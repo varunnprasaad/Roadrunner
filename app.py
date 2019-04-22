@@ -1,3 +1,4 @@
+import json
 from random import randint
 
 import jinja2
@@ -21,9 +22,16 @@ env.filters['randint'] = randint
 def index():
     cars = [car.as_dict() for car in models.Car.query.all()]
     categories = [cat.as_dict() for car in cars for cat in models.Category.query.filter_by(id=car['category_id'])]
-    for cat in categories:
-        print(cat['features'])
+    # for cat in categories:
+    #     print(cat['features'])
     return render_template("index.html", cars=cars, categories=categories)
+
+
+@app.route('/checkout/<data>')
+def checkout(data):
+    print(data)
+    data = json.loads(data)
+    return render_template('checkout.html', data=data)
 
 
 if __name__ == '__main__':

@@ -3,15 +3,3 @@ html{
     padding:0;
     box-sizing: border-box;
 }
-
-body{
-    background: red;
-}
-
-.car-row{
-    margin-bottom: 2rem;
-}
-
-.features{
-    font-size: 0.6 rem;
-}
