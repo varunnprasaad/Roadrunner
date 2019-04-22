@@ -1,32 +1,35 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+{% extends "base.html" %}
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <title>Speedrunner</title>
-</head>
-<body>
-<div class="row">
-    <div class="col-md-3">
-        <div class="card">
-            <img src="https://source.unsplash.com/random/300x300" alt="" class="card-img-top">
-            <div class="card-body">
-                <ul class="card-text">
-                    <li>test</li>
-                    <!--{% for feat in data.features %}-->
-                    <!--<p>feat</p>-->
-                    <!--{% endfor %}-->
-                </ul>
-            </div>
+{% block title %} Home {% endblock %}
+
+{% block content %}
+{% block navigation %} {% endblock %}
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <table class="table table hover">
+                <thead>
+                    <th>Brand</th>
+                    <th>Model</th>
+                    <th>Color</th>
+                    <th>Mileage</th>
+                    <th>Year</th>
+                </thead>
+                <tbody>
+                    {% for car in cars %}
+                        <tr>
+                            <td>{{ car.brand }}</td>
+                            <td>{{ car.model }}</td>
+                            <td>{{ car.color }}</td>
+                            <td>{{ car.mileage }}</td>
+                            <td>{{ car.production_year }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
 
-
-</body>
-</html>
+{% endblock %}

@@ -36,6 +36,7 @@ class Category(Base):
     name = Column(String)
     features = Column(JSON)
     car_name = Column(String(100))
+    price = Column(Integer)
 
 class Customer(Base):
 

@@ -1,9 +1,7 @@
 import json
-from random import randint
-
-import jinja2
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
+from flask_bootstrap import Bootstrap
 
 from db_handler import models
 
@@ -11,10 +9,9 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://varun:1234@localhost/dbproject'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-db = SQLAlchemy(app)
+Bootstrap(app)
 
-env = jinja2.Environment()
-env.filters['randint'] = randint
+db = SQLAlchemy(app)
 
 
 # Routes
@@ -27,11 +24,13 @@ def index():
     return render_template("index.html", cars=cars, categories=categories)
 
 
-@app.route('/checkout/<data>')
-def checkout(data):
-    print(data)
-    data = json.loads(data)
-    return render_template('checkout.html', data=data)
+@app.route('/checkout', methods=['GET','POST'])
+def checkout():
+    id = request.args.get('category')
+    cars = [car for car in models.Car.query.filter_by(category_id=id)]
+    for car in cars:
+        print(car)
+    return render_template('checkout.html', cars=cars)
 
 
 if __name__ == '__main__':
